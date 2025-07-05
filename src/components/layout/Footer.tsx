@@ -32,7 +32,7 @@ export default function Footer() {
               <span className="sr-only">Instagram</span>
             </motion.a>
             <motion.a
-              href="https://linkedin.com/in/galentaris"
+              href="https://www.linkedin.com/in/galen-taris-bariqi/"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.2, rotate: -5 }}

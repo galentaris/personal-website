@@ -29,7 +29,6 @@ export function ThemeProvider({
   enableSystem = true,
   storageKey = 'vite-ui-theme',
   attribute = 'class',
-  disableTransitionOnChange = false,
 }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme

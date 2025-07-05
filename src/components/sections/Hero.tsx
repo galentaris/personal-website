@@ -1,13 +1,15 @@
 import { motion, useTransform, useScroll } from "framer-motion"
-import { Database, Code, Brain } from "lucide-react"
+import { Bot, Code, Brain } from "lucide-react"
 import { forwardRef } from "react"
 import TypewriterText from "../ui/typewriter-text.tsx"
+import Logo from "../ui/logo.tsx"
 
 interface HeroProps {
   scrollToSection: (ref: { current: HTMLDivElement | null }) => void
+  aboutRef: { current: HTMLDivElement | null }
 }
 
-const Hero = forwardRef<HTMLDivElement, HeroProps>(({ scrollToSection }, ref) => {
+const Hero = forwardRef<HTMLDivElement, HeroProps>(({ scrollToSection, aboutRef }, ref) => {
   const { scrollYProgress } = useScroll()
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
 
@@ -20,20 +22,9 @@ const Hero = forwardRef<HTMLDivElement, HeroProps>(({ scrollToSection }, ref) =>
           transition={{ duration: 1 }}
           className="text-center"
         >
-          <motion.div
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8"
-          >
-            <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-blue-500 to-purple-500 p-1 shadow-2xl">
-              <div className="w-full h-full rounded-full bg-white dark:bg-gray-900 flex items-center justify-center">
-                <span className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  GT
-                </span>
-              </div>
-            </div>
-          </motion.div>
+          <div className="mb-8 item-center justify-center flex">
+            <Logo size={32} />
+          </div>
 
           <motion.h1
             className="text-6xl md:text-7xl font-bold mb-4"
@@ -62,8 +53,8 @@ const Hero = forwardRef<HTMLDivElement, HeroProps>(({ scrollToSection }, ref) =>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {[
             {
-              title: "Data Science",
-              icon: Database,
+              title: "AI Engineer",
+              icon: Bot,
               color: "from-emerald-500 to-green-500",
               delay: 0.8,
             },
@@ -79,7 +70,7 @@ const Hero = forwardRef<HTMLDivElement, HeroProps>(({ scrollToSection }, ref) =>
               color: "from-green-500 to-lime-500",
               delay: 1.2,
             },
-          ].map((item, index) => (
+          ].map((item) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 50 }}
@@ -115,15 +106,22 @@ const Hero = forwardRef<HTMLDivElement, HeroProps>(({ scrollToSection }, ref) =>
           transition={{ delay: 1.4, duration: 0.8 }}
           className="text-center mt-16"
         >
-          <p className="text-lg text-gray-600 dark:text-gray-400 mb-2">BS Computer Science Student at</p>
-          <p className="text-xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-2">Computer Science Student at</p>
+          <p className="text-xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-6">
             University of Indonesia
           </p>
+          <button 
+            onClick={() => scrollToSection({ current: aboutRef.current })}
+            className="px-6 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-full hover:shadow-lg transition-shadow"
+          >
+            Learn More
+          </button>
         </motion.div>
       </motion.div>
     </section>
   )
 })
+
 
 Hero.displayName = "Hero"
 export default Hero

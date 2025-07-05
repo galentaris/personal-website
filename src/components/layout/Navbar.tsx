@@ -39,7 +39,7 @@ export default function Navbar({ scrollToSection, homeRef, aboutRef, projectsRef
             <motion.button
               key={item.name}
               onClick={() => scrollToSection(item.ref)}
-              className="relative text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors font-medium"
+              className="relative text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors font-medium"
               whileHover={{ scale: 1.05 }}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ export default function Navbar({ scrollToSection, homeRef, aboutRef, projectsRef
             >
               {item.name}
               <motion.div
-                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"
+                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full"
                 initial={{ scaleX: 0 }}
                 whileHover={{ scaleX: 1 }}
                 transition={{ duration: 0.3 }}

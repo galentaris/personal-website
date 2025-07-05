@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { Mail, MapPin, Calendar } from "lucide-react"
+import { MapPin } from "lucide-react"
 import { forwardRef } from "react"
 import AnimatedSection from "../ui/animated-section.tsx"
 
@@ -21,7 +21,7 @@ const About = forwardRef<HTMLDivElement>((_, ref) => {
         {/* Skills Grid */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-16">
           {[
-            { name: "React & Next.js", icon: "⚛️", color: "from-emerald-500 to-teal-500" },
+            { name: "React & Node.js", icon: "⚛️", color: "from-emerald-500 to-teal-500" },
             { name: "Python & ML", icon: "🐍", color: "from-green-500 to-lime-500" },
             { name: "Database Design", icon: "🗄️", color: "from-teal-500 to-cyan-500" },
             { name: "UI/UX Design", icon: "🎨", color: "from-lime-500 to-green-500" },
@@ -65,21 +65,20 @@ const About = forwardRef<HTMLDivElement>((_, ref) => {
                   My Journey
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                  Initially a Computer Science student at University of Indonesia, my journey in technology began with
-                  an early passion that led to winning a robotics competition. While my career aspirations have
-                  evolved towards software development and data analytics, this experience cemented my passion for IT.
+                  As an Information Systems student at the University of Indonesia, I specialize in Artificial Intelligence 
+                  (AI) Engineering. My work focuses on the end-to-end development of intelligent applications, including 
+                  hands-on experience building a Retrieval-Augmented Generation (RAG) chatbot from the ground up using Large 
+                  Language Models (LLMs), FastAPI, and a full-stack technology.
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                  I'm currently dedicated to honing my skills in web development, machine learning, and data science,
-                  striving to leverage these abilities to create meaningful solutions and grow personally throughout
-                  my college journey.
+                  My foundation in logic and systems engineering began early, evidenced by a win in a national 
+                  robotics competition. This experience has since evolved into a passion for creating software 
+                  solutions that are not only functional but also intelligent and impactful.
                 </p>
 
                 <div className="flex flex-wrap gap-4 mb-6">
                   {[
-                    { icon: Mail, text: "galen.taris@ui.ac.id" },
                     { icon: MapPin, text: "Jakarta, Indonesia" },
-                    { icon: Calendar, text: "Available for internships" },
                   ].map((item, index) => (
                     <motion.div
                       key={index}

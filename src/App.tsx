@@ -11,7 +11,7 @@ function App() {
       <Layout>
         {({ homeRef, aboutRef, projectsRef, experienceRef, scrollToSection }) => (
           <>
-            <Hero ref={homeRef} scrollToSection={scrollToSection} />
+            <Hero ref={homeRef} scrollToSection={scrollToSection} aboutRef={aboutRef} />
             <About ref={aboutRef} />
             <Projects ref={projectsRef} />
             <Experience ref={experienceRef} />
