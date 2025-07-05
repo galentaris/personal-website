@@ -1,50 +1,52 @@
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
 
 interface TypewriterTextProps {
   texts: string[]
   className?: string
+  speed?: number
+  deleteSpeed?: number
+  delayBetween?: number
 }
 
-const TypewriterText = ({ texts, className }: TypewriterTextProps) => {
+export default function TypewriterText({
+  texts,
+  className = "",
+  speed = 100,
+  deleteSpeed = 50,
+  delayBetween = 2000,
+}: TypewriterTextProps) {
+  const [currentTextIndex, setCurrentTextIndex] = useState(0)
   const [currentText, setCurrentText] = useState("")
-  const [currentIndex, setCurrentIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
     const timeout = setTimeout(
       () => {
-        const current = texts[currentIndex]
+        const fullText = texts[currentTextIndex]
 
         if (isDeleting) {
-          setCurrentText(current.substring(0, currentText.length - 1))
+          setCurrentText(fullText.substring(0, currentText.length - 1))
         } else {
-          setCurrentText(current.substring(0, currentText.length + 1))
+          setCurrentText(fullText.substring(0, currentText.length + 1))
         }
 
-        if (!isDeleting && currentText === current) {
-          setTimeout(() => setIsDeleting(true), 1000)
+        if (!isDeleting && currentText === fullText) {
+          setTimeout(() => setIsDeleting(true), delayBetween)
         } else if (isDeleting && currentText === "") {
           setIsDeleting(false)
-          setCurrentIndex((currentIndex + 1) % texts.length)
+          setCurrentTextIndex((prev) => (prev + 1) % texts.length)
         }
       },
-      isDeleting ? 50 : 100,
+      isDeleting ? deleteSpeed : speed,
     )
 
     return () => clearTimeout(timeout)
-  }, [currentText, currentIndex, isDeleting, texts])
+  }, [currentText, isDeleting, currentTextIndex, texts, speed, deleteSpeed, delayBetween])
 
   return (
     <span className={className}>
       {currentText}
-      <motion.span
-        animate={{ opacity: [1, 0] }}
-        transition={{ duration: 0.8, repeat: Number.POSITIVE_INFINITY }}
-        className="inline-block w-0.5 h-6 bg-blue-600 ml-1"
-      />
+      <span className="animate-pulse">|</span>
     </span>
   )
 }
-
-export default TypewriterText

@@ -1,9 +1,9 @@
 import { ThemeProvider } from './components/theme-provider'
-import Layout from './pages/Layout'
+import Layout from './components/layout/layout'
 import Hero from './components/sections/Hero'
-import About from './components/sections/About'
-import Projects from './components/sections/Projects'
-import Experience from './components/sections/Experience'
+import About from './components/sections/about'
+import Projects from './components/sections/projects'
+import Experience from './components/sections/experience'
 
 function App() {
   return (

@@ -13,13 +13,13 @@ const AnimatedSection = React.forwardRef<HTMLDivElement, AnimatedSectionProps>(
     const combinedRef = (node: HTMLDivElement) => {
       // Apply to both refs
       ref.current = node
-      if (typeof forwardedRef === 'function') {
+      if (typeof forwardedRef === "function") {
         forwardedRef(node)
       } else if (forwardedRef) {
         forwardedRef.current = node
       }
     }
-    
+
     const isInView = useInView(ref, { once: false, amount: 0.2 })
     const controls = useAnimation()
 
@@ -45,7 +45,7 @@ const AnimatedSection = React.forwardRef<HTMLDivElement, AnimatedSectionProps>(
         {children}
       </motion.section>
     )
-  }
+  },
 )
 
 AnimatedSection.displayName = "AnimatedSection"
