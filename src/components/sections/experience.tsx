@@ -1,25 +1,18 @@
 import { forwardRef } from "react"
-import { motion } from "framer-motion"
 import AnimatedSection from "../ui/animated-section"
-import EnhancedExperienceTimeline from "../ui/experience-timeline"
+import ExperienceTimeline from "../ui/experience-timeline"
 
 const Experience = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <AnimatedSection ref={ref} className="py-12 sm:py-16 lg:py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2
-          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-12 sm:mb-16 px-4"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+    <AnimatedSection ref={ref} id="experience" className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1180px] mx-auto flex flex-col gap-8 sm:gap-10">
+        <div className="flex flex-col gap-2">
+          <span className="section-label">03 — Track record</span>
+          <h2 className="grad-text font-extrabold tracking-[-0.03em] text-[clamp(28px,5vw,46px)]">
             Experience
-          </span>
-        </motion.h2>
-        <div className="max-w-4xl mx-auto">
-          <EnhancedExperienceTimeline />
+          </h2>
         </div>
+        <ExperienceTimeline />
       </div>
     </AnimatedSection>
   )

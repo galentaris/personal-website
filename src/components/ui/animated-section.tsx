@@ -20,7 +20,9 @@ const AnimatedSection = React.forwardRef<HTMLDivElement, AnimatedSectionProps>(
       }
     }
 
-    const isInView = useInView(ref, { once: false, amount: 0.2 })
+    // Reveal once, as soon as a small part enters the viewport. Using a small
+    // amount + once avoids tall sections staying hidden when 20% never fits.
+    const isInView = useInView(ref, { once: true, amount: 0.08 })
     const controls = useAnimation()
 
     useEffect(() => {
@@ -33,12 +35,12 @@ const AnimatedSection = React.forwardRef<HTMLDivElement, AnimatedSectionProps>(
       <motion.section
         ref={combinedRef}
         variants={{
-          hidden: { opacity: 0, y: 50 },
+          hidden: { opacity: 0, y: 40 },
           visible: { opacity: 1, y: 0 },
         }}
         initial="hidden"
         animate={controls}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         className={className}
         {...props}
       >

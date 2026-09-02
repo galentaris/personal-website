@@ -1,26 +1,26 @@
 import { forwardRef } from "react"
-import { motion } from "framer-motion"
 import AnimatedSection from "../ui/animated-section"
-import EnhancedProjectCarousel from "../ui/project-carousel"
+import ProjectGrid from "../ui/project-grid"
 
 const Projects = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <AnimatedSection
-      ref={ref}
-      className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 dark:from-emerald-950/20 dark:to-teal-950/20"
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2
-          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-12 sm:mb-16 px-4"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+    <AnimatedSection ref={ref} id="projects" className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Ambient orb */}
+      <div
+        className="orb animate-orb-b top-[10%] right-[-14%] w-[40vw] h-[40vw]"
+        style={{ background: "radial-gradient(circle, #2dd4bf, transparent 70%)" }}
+      />
+      <div className="relative max-w-[1180px] mx-auto flex flex-col gap-8 sm:gap-11">
+        <div className="flex flex-col gap-2">
+          <span className="section-label">02 — Work</span>
+          <h2 className="grad-text font-extrabold tracking-[-0.03em] text-[clamp(28px,5vw,46px)]">
             Featured Projects
-          </span>
-        </motion.h2>
-        <EnhancedProjectCarousel />
+          </h2>
+          <p className="max-w-[56ch] text-[15px] leading-relaxed" style={{ color: "var(--fg-2)" }}>
+            Select a project to see the full case, stack, and links.
+          </p>
+        </div>
+        <ProjectGrid />
       </div>
     </AnimatedSection>
   )

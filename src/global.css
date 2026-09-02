@@ -59,12 +59,99 @@
   }
 }
 
+/* ============================================================
+   Portfolio design system (from Claude Design)
+   Sleek emerald/teal glass — light & dark
+   ============================================================ */
+@layer base {
+  :root {
+    /* Shared brand gradients */
+    --grad: linear-gradient(90deg, #059669, #0d9488);
+    --grad3: linear-gradient(95deg, #059669, #0d9488 52%, #65a30d);
+
+    /* Light mode surfaces & text */
+    --bg-grad: linear-gradient(150deg, #ecfdf5 0%, #f0fdf4 48%, #f0fdfa 100%);
+    --surface: rgba(255, 255, 255, 0.8);
+    --surface-2: rgba(255, 255, 255, 0.55);
+    --border-c: rgba(255, 255, 255, 0.7);
+    --hair: rgba(17, 24, 39, 0.08);
+    --fg: #111827;
+    --fg-2: #374151;
+    --fg-3: #6b7280;
+    --nav: rgba(255, 255, 255, 0.72);
+    --shadow: 0 10px 34px rgba(2, 44, 34, 0.09);
+    --orb: 0.5;
+  }
+
+  .dark {
+    --bg-grad: linear-gradient(150deg, #030712 0%, #022c22 55%, #042f2e 100%);
+    --surface: rgba(17, 24, 39, 0.8);
+    --surface-2: rgba(17, 24, 39, 0.55);
+    --border-c: rgba(31, 41, 55, 0.55);
+    --hair: rgba(255, 255, 255, 0.07);
+    --fg: #ffffff;
+    --fg-2: #d1d5db;
+    --fg-3: #9ca3af;
+    --nav: rgba(3, 7, 18, 0.7);
+    --shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
+    --orb: 0.38;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  /* Frosted glass surface */
+  .glass {
+    background: var(--surface);
+    border: 1px solid var(--border-c);
+    box-shadow: var(--shadow);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
+
+  /* Gradient text helpers */
+  .grad-text {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .grad3-text {
+    background: var(--grad3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .grad-bg {
+    background: var(--grad);
+  }
+
+  /* Monospace section eyebrow label */
+  .section-label {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #0d9488;
+  }
+
+  /* Soft ambient background orb */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: var(--orb);
+    pointer-events: none;
   }
 }
 

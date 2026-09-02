@@ -44,9 +44,12 @@ export default function TypewriterText({
   }, [currentText, isDeleting, currentTextIndex, texts, speed, deleteSpeed, delayBetween])
 
   return (
-    <span className={className}>
+    <span className={className} style={{ color: "var(--fg-2)" }}>
       {currentText}
-      <span className="animate-pulse">|</span>
+      <span
+        className="inline-block w-0.5 h-[1.05em] ml-0.5 align-[-0.16em] animate-caret"
+        style={{ background: "#0d9488" }}
+      />
     </span>
   )
 }

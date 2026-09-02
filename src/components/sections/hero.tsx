@@ -1,126 +1,117 @@
-import { motion, useTransform, useScroll } from "framer-motion"
-import { Bot, Code, Brain } from "lucide-react"
+import { motion } from "framer-motion"
+import { Bot, Code, Brain, ArrowDown } from "lucide-react"
 import { forwardRef } from "react"
 import TypewriterText from "../ui/typewriter-text"
-import Logo from "../ui/logo"
 
 interface HeroProps {
   scrollToSection: (ref: { current: HTMLDivElement | null }) => void
   aboutRef: { current: HTMLDivElement | null }
 }
 
-const Hero = forwardRef<HTMLDivElement, HeroProps>(({ scrollToSection, aboutRef }, ref) => {
-  const { scrollYProgress } = useScroll()
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
+const roles = [
+  { title: "AI Engineer", note: "RAG systems, LLM tooling, evaluation", icon: Bot, glow: "#34d399" },
+  { title: "Fullstack Developer", note: "TypeScript, Laravel, SpringBoot", icon: Code, glow: "#2dd4bf" },
+  { title: "Machine Learning", note: "Intelligent, impactful solutions", icon: Brain, glow: "#a3e635" },
+]
 
+const orbs = [
+  { style: "top-[-12%] left-[-6%] w-[44vw] h-[44vw]", color: "#34d399", anim: "animate-orb-a" },
+  { style: "top-[8%] right-[-10%] w-[40vw] h-[40vw]", color: "#2dd4bf", anim: "animate-orb-b" },
+  { style: "bottom-[-18%] left-[26%] w-[36vw] h-[36vw]", color: "#a3e635", anim: "animate-orb-a" },
+  { style: "bottom-[2%] right-[14%] w-[26vw] h-[26vw]", color: "#06b6d4", anim: "animate-orb-b" },
+]
+
+const Hero = forwardRef<HTMLDivElement, HeroProps>(({ scrollToSection, aboutRef }, ref) => {
   return (
     <section
       ref={ref}
-      className="pt-20 sm:pt-32 pb-10 sm:pb-20 min-h-screen flex flex-col justify-center relative overflow-hidden"
+      id="home"
+      className="relative overflow-hidden min-h-screen flex flex-col justify-center pt-28 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8"
     >
-      <motion.div style={{ y }} className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
+      {/* Ambient orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {orbs.map((o, i) => (
+          <div
+            key={i}
+            className={`orb ${o.style} ${o.anim}`}
+            style={{ background: `radial-gradient(circle, ${o.color}, transparent 70%)` }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-10 max-w-[1000px] mx-auto flex flex-col items-center text-center gap-6 sm:gap-8">
+        {/* Name */}
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-center"
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="grad3-text font-extrabold leading-[1.02] tracking-[-0.035em] text-balance text-[clamp(40px,9vw,84px)]"
         >
-          <div className="mb-6 sm:mb-8 flex items-center justify-center">
-            <Logo size={50} className="sm:w-8 sm:h-8" />
-          </div>
+          Galen Taris Bariqi
+        </motion.h1>
 
-          <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 px-2"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-lime-600 bg-clip-text text-transparent leading-tight block">
-              Galen Taris Bariqi
-            </span>
-          </motion.h1>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="mb-12 sm:mb-16 px-4"
-          >
-            <TypewriterText
-              texts={["Exploring Technology", "Building Solutions", "Creating Impact"]}
-              className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-400"
-            />
-          </motion.div>
+        {/* Typewriter */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="min-h-[1.6em]"
+        >
+          <TypewriterText
+            texts={["Exploring Technology", "Building Solutions", "Creating Impact"]}
+            className="font-mono font-medium text-[clamp(15px,2.4vw,22px)]"
+          />
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto px-4">
-          {[
-            {
-              title: "AI Engineer",
-              icon: Bot,
-              color: "from-emerald-500 to-green-500",
-              delay: 0.8,
-            },
-            {
-              title: "Fullstack Developer",
-              icon: Code,
-              color: "from-teal-500 to-cyan-500",
-              delay: 1.0,
-            },
-            {
-              title: "Machine Learning",
-              icon: Brain,
-              color: "from-green-500 to-lime-500",
-              delay: 1.2,
-            },
-          ].map((item) => (
+        {/* Role cards */}
+        <div className="flex flex-wrap justify-center gap-3.5 sm:gap-5 w-full mt-1">
+          {roles.map((role, i) => (
             <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 50 }}
+              key={role.title}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: item.delay, duration: 0.8 }}
-              whileHover={{
-                scale: 1.05,
-                rotateY: 5,
-                transition: { duration: 0.3 },
-              }}
-              className="relative group"
+              transition={{ delay: 0.5 + i * 0.15, duration: 0.7 }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="glass relative overflow-hidden flex-1 min-w-[200px] max-w-[280px] rounded-[20px] px-5 py-6 flex flex-col items-center gap-3"
             >
               <div
-                className={`absolute inset-0 bg-gradient-to-r ${item.color} rounded-2xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity duration-300`}
+                className="absolute -top-[40%] left-1/2 -translate-x-1/2 w-[150px] h-[150px] rounded-full blur-[34px] opacity-50"
+                style={{ background: `radial-gradient(circle, ${role.glow}, transparent 70%)` }}
               />
-              <div className="relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 border border-white/20 dark:border-gray-800/20 shadow-xl">
-                <div
-                  className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 mx-auto mb-3 sm:mb-4 rounded-xl bg-gradient-to-r ${item.color} flex items-center justify-center shadow-lg`}
-                >
-                  <item.icon className="text-white" size={20} />
-                </div>
-                <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white text-center leading-tight">
-                  {item.title}
-                </h2>
-              </div>
+              <span className="relative grid place-items-center w-[46px] h-[46px] rounded-[14px] grad-bg shadow-[0_8px_22px_rgba(5,150,105,.3)]">
+                <role.icon className="text-white" size={22} />
+              </span>
+              <span className="relative font-bold text-[15.5px]" style={{ color: "var(--fg)" }}>
+                {role.title}
+              </span>
+              <span className="relative text-[12.5px] leading-relaxed" style={{ color: "var(--fg-3)" }}>
+                {role.note}
+              </span>
             </motion.div>
           ))}
         </div>
 
+        {/* Subtitle + CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 0.8 }}
-          className="text-center mt-12 sm:mt-16 px-4"
+          transition={{ delay: 1, duration: 0.8 }}
+          className="flex flex-col items-center gap-5 mt-2"
         >
-          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-2">Computer Science Student at</p>
-          <p className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-6">
-            University of Indonesia
+          <p className="text-[clamp(13.5px,1.8vw,16px)] font-medium" style={{ color: "var(--fg-3)" }}>
+            <span className="grad-text font-semibold">Fresh Graduate at Computer Science University of Indonesia</span>
           </p>
-          <button
+          <motion.button
             onClick={() => scrollToSection({ current: aboutRef.current })}
-            className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-full hover:shadow-lg transition-all duration-300 text-sm sm:text-base font-medium"
+            whileHover={{ y: -3 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2.5 grad-bg text-white font-bold text-[14.5px] px-7 py-3.5 rounded-full shadow-[0_14px_32px_rgba(5,150,105,.35)] transition-shadow hover:shadow-[0_20px_42px_rgba(5,150,105,.45)]"
           >
             Learn More
-          </button>
+            <ArrowDown size={16} />
+          </motion.button>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   )
 })
